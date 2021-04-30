@@ -53,7 +53,7 @@ const Login = (props) => {
                 <div className="alert alert-success" role="alert">
                     <h4 className="alert-heading">Login successful!</h4>
                     <hr></hr>
-                    <p className="mb-0">You will be redirected back to the homepage in 5 seconds.</p>
+                    <p className="mb-0">You will be redirected back to the homepage in {props.ms} seconds.</p>
                 </div>}
         </div>
     );

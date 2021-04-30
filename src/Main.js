@@ -24,6 +24,10 @@ function Main(props) {
                     </div>
                 </div>
             </div>
+            {props.loggedOut &&
+                <div className="alert alert-success" role="alert">
+                    <h4 className="alert-heading">Logged out!</h4>
+                </div>}
         </div>
     );
 }
