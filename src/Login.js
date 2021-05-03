@@ -9,11 +9,11 @@ const Login = (props) => {
         e.preventDefault()
         axios({
             method: 'post',
-            url: 'https://awesomeincbootcampapi-ianrios529550.codeanyapp.com/oauth/token',
+            url: 'http://clonesProject-rachelehlers1288217.codeanyapp.com/oauth/token',
             data: {
                 grant_type: "password",
-                client_id: "93361012-98b9-4a86-9d63-8c2bc0437acb",
-                client_secret: "SiDwGvf7JPrjRQkdSu1gIFqAO7UOGqVxMhDEaor7",
+                client_id: "2",
+                client_secret: "1BhzemjkSMW2fs7UOau1AockeisPRTKlpp2FNm2u",
                 scope: "",
                 ...loginData
             }

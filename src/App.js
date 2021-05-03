@@ -26,7 +26,7 @@ function App() {
   function logout() {
     axios({
       method: 'get',
-      url: 'http://awesomeincbootcampapi-ianrios529550.codeanyapp.com/api/auth/logout',
+      url: 'http://clonesProject-rachelehlers1288217.codeanyapp.com/api/auth/logout',
       headers: { "Authorization": "Bearer " + token }
     })
       .then(function (response) {
@@ -56,7 +56,7 @@ function App() {
   function getUser(token) {
     axios({
       method: 'get',
-      url: 'http://awesomeincbootcampapi-ianrios529550.codeanyapp.com/api/auth/user',
+      url: 'http://clonesProject-rachelehlers1288217.codeanyapp.com/api/auth/user',
       data: { token },
       headers: { "Authorization": "Bearer " + token }
     })
