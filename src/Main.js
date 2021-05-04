@@ -1,24 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom'
+import Post from "./Post.js"
+import Navbar from "./Navbar.js"
+import Create from "./Create.js"
 
 function Main(props) {
 
+
     return (
         <div className="row">
+            <Navbar />
             <div className="col-4">
-                <div className="card" >
+                <Post postData={props.postData}/>
+            </div>
+            <div className="col-3">
+                <div className="card border-white" >
                     <div className="card-body">
-                        <h5 className="card-title">Main page</h5>
-                        <p className="card-text">Welcome to my website!</p>
-
                         {!props.token ?
                             <>
                                 <Link to="/login" className="btn btn-primary">Log in</Link>
                                 &nbsp;
                                 <Link to="/signup" className="btn btn-primary">Sign up</Link>
-                            </> : <> 
-                            <h1> Welcome {props.userData.name}</h1>
-                            <button onClick={props.logout} type="button" className="btn btn-primary">Logout</button> </>
+                            </> : <>
+                                <h1> Welcome {props.userData.name}</h1>
+                                <button onClick={props.logout} type="button" className="btn btn-primary">Logout</button> 
+                                &nbsp;
+                                <a href="/create" className="btn btn-primary" role="button">Create Post</a>
+                                &nbsp;
+                                <button type="button" className="btn btn-primary"> Saved Posts </button>
+                                </>
                         }
 
                     </div>

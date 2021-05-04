@@ -9,11 +9,11 @@ const Login = (props) => {
         e.preventDefault()
         axios({
             method: 'post',
-            url: 'http://clonesProject-rachelehlers1288217.codeanyapp.com/oauth/token',
+            url: 'https://finalprojectbackend-rachelehlers1288217.codeanyapp.com/oauth/token',
             data: {
                 grant_type: "password",
                 client_id: "2",
-                client_secret: "1BhzemjkSMW2fs7UOau1AockeisPRTKlpp2FNm2u",
+                client_secret: "zHCsJ2kWlJXskcOSUpMxOSaMbSXdfIRzxpNlfbZZ",
                 scope: "",
                 ...loginData
             }

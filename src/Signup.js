@@ -8,7 +8,7 @@ const Signup = (props) => {
         e.preventDefault()
         axios({
             method: 'post',
-            url: 'http://awesomeincbootcampapi-ianrios529550.codeanyapp.com/api/auth/register',
+            url: 'http://finalprojectbackend-rachelehlers1288217.codeanyapp.com/api/register',
             data: registrationData
         })
             .then(function (response) {

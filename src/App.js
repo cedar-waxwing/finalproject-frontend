@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Main from "./Main.js"
 import Signup from "./Signup.js"
 import Login from "./Login.js"
+import Create from "./Create.js"
+import Post from "./Post.js"
 import { BrowserRouter as Router, Link, Switch, Route, useHistory, useLocation } from 'react-router-dom'
 import axios from 'axios';
 
@@ -26,7 +28,7 @@ function App() {
   function logout() {
     axios({
       method: 'get',
-      url: 'http://clonesProject-rachelehlers1288217.codeanyapp.com/api/auth/logout',
+      url: 'http://finalprojectbackend-rachelehlers1288217.codeanyapp.com/api/logout',
       headers: { "Authorization": "Bearer " + token }
     })
       .then(function (response) {
@@ -56,7 +58,7 @@ function App() {
   function getUser(token) {
     axios({
       method: 'get',
-      url: 'http://clonesProject-rachelehlers1288217.codeanyapp.com/api/auth/user',
+      url: 'http://finalprojectbackend-rachelehlers1288217.codeanyapp.com/api/user',
       data: { token },
       headers: { "Authorization": "Bearer " + token }
     })
@@ -85,20 +87,50 @@ function App() {
     }, 1000)
   }
 
+//_____________________________________
+//getting all posts from API 
 
+const [postData, setPost] = useState([])
+
+function getPosts() {
+  axios({
+    method: 'get',
+    url: 'http://finalprojectbackend-rachelehlers1288217.codeanyapp.com/api/posts/all',
+    // data: { token },
+    // headers: { "Authorization": "Bearer " + token }
+  })
+    .then(function (response) {
+      setPost(response.data);
+      console.log(response)
+
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+//this runs the function onmount.
+useEffect(()=>{
+  getPosts()
+},[])
+
+console.log(postData)
+//_____________________________________
 
   return (
     <>
       {/* this is where any other code would go  */}
       <Switch>
         <Route exact path={["/main", "/"]}>
-          <Main userData={userData} token={token} logout={logout} loggedOut={loggedOut} />
+          <Main userData={userData} token={token} logout={logout} loggedOut={loggedOut} postData={postData}/>
         </Route>
         <Route path="/signup">
           <Signup saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms}/>
         </Route>
         <Route path="/login">
           <Login saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms}/>
+        </Route>
+        <Route exact path={["/create"]}>
+          <Create  />
         </Route>
       </Switch>
     </>
