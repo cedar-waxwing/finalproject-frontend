@@ -3,7 +3,7 @@ import Main from "./Main.js"
 import Signup from "./Signup.js"
 import Login from "./Login.js"
 import Create from "./Create.js"
-import Post from "./Post.js"
+import Details from "./Details.js"
 import { BrowserRouter as Router, Link, Switch, Route, useHistory, useLocation } from 'react-router-dom'
 import axios from 'axios';
 
@@ -131,6 +131,9 @@ console.log(postData)
         </Route>
         <Route exact path={["/create"]}>
           <Create  />
+        </Route>
+        <Route path={["/post/:id"]}>
+          <Details postData={postData}/>
         </Route>
       </Switch>
     </>

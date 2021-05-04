@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom'
-import Post from "./Post.js"
+import Posts from "./Posts.js"
 import Navbar from "./Navbar.js"
 import Create from "./Create.js"
 
@@ -11,7 +11,7 @@ function Main(props) {
         <div className="row">
             <Navbar />
             <div className="col-4">
-                <Post postData={props.postData}/>
+                <Posts postData={props.postData}/>
             </div>
             <div className="col-3">
                 <div className="card border-white" >
