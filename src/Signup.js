@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { axiosHelper } from "./axiosHelper";
+
 
 const Signup = (props) => {
     const [registrationData, setRegistrationData] = useState({})
 
+    function signupHandler(res) {
+        props.saveToken(res.data.data.token);
+        props.handleSuccess()
+    }
+
     function userRegistration(e) {
         e.preventDefault()
-        axios({
+        axiosHelper({
             method: 'post',
-            url: 'http://finalprojectbackend-rachelehlers1288217.codeanyapp.com/api/register',
-            data: registrationData
+            route: '/api/register',
+            data: registrationData,
+            successMethod: signupHandler
         })
-            .then(function (response) {
-                props.saveToken(response.data.data.token);
-                props.handleSuccess()
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
     }
 
 

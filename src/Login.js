@@ -1,31 +1,30 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { axiosHelper } from "./axiosHelper";
 
 const Login = (props) => {
     const [loginData, setLoginData] = useState({})
 
+    function successHandler(res) {
+        props.saveToken(res.data.access_token);
+        props.handleSuccess()
+    }
+
     function userLogin(e) {
         console.log(loginData)
         e.preventDefault()
-        axios({
+        axiosHelper({
             method: 'post',
-            url: 'https://finalprojectbackend-rachelehlers1288217.codeanyapp.com/oauth/token',
+            route: '/oauth/token',
             data: {
                 grant_type: "password",
                 client_id: "2",
                 client_secret: "zHCsJ2kWlJXskcOSUpMxOSaMbSXdfIRzxpNlfbZZ",
                 scope: "",
                 ...loginData
-            }
+            },
+            successMethod: successHandler
         })
-            .then(function (response) {
-                console.log(response)
-                props.saveToken(response.data.access_token);
-                props.handleSuccess()
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
     }
 
     const handleInputChange = e => setLoginData(previousState => ({ ...previousState, [e.target.name]: e.target.value }));

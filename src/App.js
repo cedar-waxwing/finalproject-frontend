@@ -6,6 +6,7 @@ import Create from "./Create.js"
 import Details from "./Details.js"
 import { BrowserRouter as Router, Link, Switch, Route, useHistory, useLocation } from 'react-router-dom'
 import axios from 'axios';
+import { axiosHelper } from "./axiosHelper";
 
 function App() {
   let history = useHistory();
@@ -22,26 +23,25 @@ function App() {
     window.localStorage.setItem("token", token)
     getUser(token)
     setLoggedOut(false)
+    setMs(3)
     //use react router hook, useHistory -- will take you to a specific page anywhere in the site. Helpful if you have logged in and want to take ther person somewhere else. 
   }
 
-  function logout() {
-    axios({
-      method: 'get',
-      url: 'http://finalprojectbackend-rachelehlers1288217.codeanyapp.com/api/logout',
-      headers: { "Authorization": "Bearer " + token }
-    })
-      .then(function (response) {
-        setToken("")
-        window.localStorage.removeItem("token")
-        setUser({})
-        setLoggedOut(true)
-        setInterval(()=>setLoggedOut(false), 3000)
+  function handleLogout(response) {
+    setToken("")
+    window.localStorage.removeItem("token")
+    setUser({})
+    setLoggedOut(true)
+    setInterval(() => setLoggedOut(false), 3000)
 
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  }
+
+  function logout() {
+    axiosHelper({
+      route: '/api/logout',
+      token,
+      successMethod: handleLogout
+    })
   }
 
   //post of didMount. 
@@ -53,99 +53,93 @@ function App() {
   }, [])
 
 
+  //save userdata
   const [userData, setUser] = useState({})
 
-  function getUser(token) {
-    axios({
-      method: 'get',
-      url: 'http://finalprojectbackend-rachelehlers1288217.codeanyapp.com/api/user',
-      data: { token },
-      headers: { "Authorization": "Bearer " + token }
-    })
-      .then(function (response) {
-        setUser(response.data);
-
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  function saveUser(res) {
+    setUser(res.data)
   }
+
+  function getUser(token) {
+    axiosHelper({
+      method: 'get',
+      route: '/api/user',
+      token,
+      successMethod: saveUser
+    })
+  }
+
+
+
   //This function returns a successful login/signup notice if the user is successful in logging in/signing up. 
   const handleSuccess = () => {
     let countdown = null;
     setSuccess(true)
-    countdown = setInterval(() => {      
+    countdown = setInterval(() => {
       setMs(prevMs => {
         if (prevMs <= 1) {
           setSuccess(false)
           history.push("/main")
-          clearInterval(countdown);
-          console.log("interval")
+          clearInterval(countdown)
         }
-        return prevMs-1
+        return prevMs - 1
       })
     }, 1000)
   }
 
-//_____________________________________
-//getting all posts from API 
+  //_____________________________________
+  //getting all posts from API 
 
-const [postData, setPost] = useState([])
+  const [postData, setPost] = useState([])
 
-function getPosts() {
-  axios({
-    method: 'get',
-    url: 'http://finalprojectbackend-rachelehlers1288217.codeanyapp.com/api/posts/all',
-    // data: { token },
-    // headers: { "Authorization": "Bearer " + token }
-  })
-    .then(function (response) {
-      setPost(response.data);
-      console.log(response)
+  function savePost(res) {
+    setPost(res.data);
+  }
 
+  function getPosts() {
+    axiosHelper({
+      method: 'get',
+      route: '/api/posts/all',
+      successMethod: savePost
     })
-    .catch(function (error) {
-      console.log(error);
-    });
-}
-//this runs the function onmount.
-useEffect(()=>{
-  getPosts()
-},[])
+  }
+    //this runs the function onmount.
+    useEffect(() => {
+      getPosts()
+    }, [])
 
-console.log(postData)
-//_____________________________________
+    //_____________________________________
 
-  return (
-    <>
-      {/* this is where any other code would go  */}
-      <Switch>
-        <Route exact path={["/main", "/"]}>
-          <Main userData={userData} token={token} logout={logout} loggedOut={loggedOut} postData={postData}/>
-        </Route>
-        <Route path="/signup">
-          <Signup saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms}/>
-        </Route>
-        <Route path="/login">
-          <Login saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms}/>
-        </Route>
-        <Route exact path={["/create"]}>
-          <Create  />
-        </Route>
-        <Route path={["/post/:id"]}>
-          <Details postData={postData}/>
-        </Route>
-      </Switch>
-    </>
-  );
-}
+    return (
+      <>
+        {/* this is where any other code would go  */}
+        <Switch>
+          <Route exact path={["/main", "/"]}>
+            <Main userData={userData} token={token} logout={logout} loggedOut={loggedOut} postData={postData} />
+          </Route>
+          <Route path="/signup">
+            <Signup saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms} />
+          </Route>
+          <Route path="/login">
+            <Login saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms} />
+          </Route>
+          <Route exact path={["/create"]}>
+            <Create />
+          </Route>
+          <Route path={["/post/:id"]}>
+            <Details postData={postData} />
+          </Route>
+        </Switch>
+      </>
+    );
+  }
 
-export default function AppWithRouter() {
-  return (
-    <>
-      <Router>
-        <App />
-      </Router>
-    </>
-  )
-}
+  export default function AppWithRouter() {
+    return (
+      <>
+        <Router>
+          <App />
+        </Router>
+      </>
+    )
+  }
