@@ -69,8 +69,6 @@ function App() {
     })
   }
 
-
-
   //This function returns a successful login/signup notice if the user is successful in logging in/signing up. 
   const handleSuccess = () => {
     let countdown = null;
@@ -124,7 +122,7 @@ function App() {
             <Login saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms} />
           </Route>
           <Route exact path={["/create"]}>
-            <Create />
+            <Create token={token}/>
           </Route>
           <Route path={["/post/:id"]}>
             <Details postData={postData} />

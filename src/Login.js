@@ -19,7 +19,7 @@ const Login = (props) => {
             data: {
                 grant_type: "password",
                 client_id: "2",
-                client_secret: "zHCsJ2kWlJXskcOSUpMxOSaMbSXdfIRzxpNlfbZZ",
+                client_secret: "0d6izzZa9m5pSZD6joTzywGQFeaNo7FbINMPm8QM",
                 scope: "",
                 ...loginData
             },

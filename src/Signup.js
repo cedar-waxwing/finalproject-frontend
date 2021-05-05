@@ -21,7 +21,6 @@ const Signup = (props) => {
         })
     }
 
-
     const handleInputChange = e => setRegistrationData(previousState => ({ ...previousState, [e.target.name]: e.target.value }));
 
     return (
