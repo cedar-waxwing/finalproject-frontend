@@ -10,7 +10,7 @@ const Create = (props) => {
         e.preventDefault()
         axiosHelper({
             method: 'post',
-            route: '/api/posts/create',
+            route: '/api/post/create',
             data: postData,
             token: props.token,
         })
@@ -19,7 +19,6 @@ const Create = (props) => {
     const handlePost = e => setPostData(previousState => ({ ...previousState, [e.target.name]: e.target.value }));
 
     return (
-        <div className="row">
             <div className="col-4">
                 <form onSubmit={postCreation}>
                     <div className="mb-3">
@@ -44,7 +43,6 @@ const Create = (props) => {
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
             </div>
-        </div>
     );
 }
 

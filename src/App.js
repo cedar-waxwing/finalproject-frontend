@@ -4,6 +4,8 @@ import Signup from "./Signup.js"
 import Login from "./Login.js"
 import Create from "./Create.js"
 import Details from "./Details.js"
+import Mypage from "./Mypage.js"
+import Navbar from "./Navbar.js"
 import { BrowserRouter as Router, Link, Switch, Route, useHistory, useLocation } from 'react-router-dom'
 import axios from 'axios';
 import { axiosHelper } from "./axiosHelper";
@@ -101,43 +103,50 @@ function App() {
       successMethod: savePost
     })
   }
-    //this runs the function onmount.
-    useEffect(() => {
-      getPosts()
-    }, [])
+  //this runs the function onmount.
+  useEffect(() => {
+    getPosts()
+  }, [])
 
-    //_____________________________________
+  //_____________________________________
 
-    return (
-      <>
-        {/* this is where any other code would go  */}
-        <Switch>
-          <Route exact path={["/main", "/"]}>
-            <Main userData={userData} token={token} logout={logout} loggedOut={loggedOut} postData={postData} />
-          </Route>
-          <Route path="/signup">
-            <Signup saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms} />
-          </Route>
-          <Route path="/login">
-            <Login saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms} />
-          </Route>
-          <Route exact path={["/create"]}>
-            <Create token={token}/>
-          </Route>
-          <Route path={["/post/:id"]}>
-            <Details postData={postData} />
-          </Route>
-        </Switch>
-      </>
-    );
-  }
+  return (
+      <div className="container">
+        <div className="row">
+          {/* this is where any other code would go  */}
+          <Switch>
+            <Route exact path={["/main", "/"]}>
+              <Main userData={userData} token={token} logout={logout} loggedOut={loggedOut} postData={postData} />
+            </Route>
+            <Route path="/signup">
+              <Signup saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms} />
+            </Route>
+            <Route path="/login">
+              <Login saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms} />
+            </Route>
+            <Route exact path={["/create"]}>
+              <Create token={token} />
+            </Route>
+            <Route path={["/post/:id"]}>
+              <Details postData={postData} />
+            </Route>
+            <Route path={["/mypage"]}>
+              <Mypage userData={userData} token={token}/>
+            </Route>
+          </Switch>
+        </div>
+      </div>
+  );
+}
 
-  export default function AppWithRouter() {
-    return (
-      <>
-        <Router>
-          <App />
-        </Router>
-      </>
-    )
-  }
+export default function AppWithRouter() {
+  return (
+    <>
+      <Router>
+      <Navbar />
+        <App />
+        {/* put footer here  */}
+      </Router>
+    </>
+  )
+}

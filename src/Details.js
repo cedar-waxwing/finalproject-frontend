@@ -9,7 +9,6 @@ const Details = (props) => {
     const post = props.postData.find(item => item.id === parseInt(id))
 
     return (
-        <div className="row">
             <div className="col-12">
             <a href="/main" type="button" class="back btn btn-primary">Back</a>
                 <div className="card">
@@ -21,7 +20,6 @@ const Details = (props) => {
                     </div>
                 </div>
             </div>
-        </div>
     );
 }
 

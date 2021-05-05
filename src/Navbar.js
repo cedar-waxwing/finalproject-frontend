@@ -4,7 +4,6 @@ import axios from 'axios';
 const Navbar = (props) => {
 
     return (
-        <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#">Equip</a>
@@ -31,7 +30,6 @@ const Navbar = (props) => {
                     </div>
                 </div>
             </nav>
-        </div>
     );
 }
 

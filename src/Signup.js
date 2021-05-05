@@ -24,7 +24,7 @@ const Signup = (props) => {
     const handleInputChange = e => setRegistrationData(previousState => ({ ...previousState, [e.target.name]: e.target.value }));
 
     return (
-        <div className="row">
+        <>
             <div className="col-4">
                 <div>
                     SIGN UP
@@ -50,7 +50,7 @@ const Signup = (props) => {
                     <hr></hr>
                     <p className="mb-0">You will be redirected back to the homepage in {props.ms} seconds.</p>
                 </div>}
-        </div>
+        </>
     );
 }
 
