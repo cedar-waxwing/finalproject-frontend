@@ -19,7 +19,7 @@ const Create = (props) => {
     const handlePost = e => setPostData(previousState => ({ ...previousState, [e.target.name]: e.target.value }));
 
     return (
-            <div className="col-4">
+            <div className="col-12">
                 <form onSubmit={postCreation}>
                     <div className="mb-3">
                         <label htmlFor="inputTitle" className="form-label">Title</label>

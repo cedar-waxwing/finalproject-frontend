@@ -11,7 +11,7 @@ export function axiosHelper(props) {
 		failureMethod = e => console.log(e)
 	} = props; // setting default prop values
 
-	const API_URL = 'http://finalprojectbackend-rachelehlers1288217.codeanyapp.com'
+	const API_URL = 'https://finalprojectbackend-rachelehlers1288217.codeanyapp.com'
 
 	return axios({
 		method,

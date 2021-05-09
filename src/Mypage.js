@@ -33,6 +33,7 @@ function Mypage(props) {
 
     return (
         <>
+        <div>Posts I've Created</div>
             <div className="col-4">
                 <Posts postData={myPostData} />
             </div>
