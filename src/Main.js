@@ -43,8 +43,8 @@ function Main(props) {
 
     return (
         <>
-            <div className="col-4">
-            <form onSubmit={searchPosts}>
+            <div className="col-12">
+            <form className="mx-auto" onSubmit={searchPosts}>
                     <input value={searchData} onChange={handleSearch} type="text" name="search"></input>
                     &nbsp;
                     <button className="btn btn-success" type="submit">Search</button>
@@ -57,25 +57,6 @@ function Main(props) {
                     </>
                 } */}
                 <Posts postData={props.postData} />
-            </div>
-            <div className="col-3">
-                <div className="card border-white" >
-                    <div className="card-body">
-                        {!props.token ?
-                            <>
-                                <Link to="/login" className="btn btn-success">Log in</Link>
-                                &nbsp;
-                                <Link to="/signup" className="btn btn-success">Sign up</Link>
-                            </> : <>
-                                <h1 className="allfont"> Welcome, {props.userData.name}</h1>
-                                <button onClick={props.logout} type="button" className="btn btn-success">Logout</button>
-                                &nbsp;
-                                <a href="/mypage" className="btn btn-success" role="button">Manage my Posts</a>
-                            </>
-                        }
-
-                    </div>
-                </div>
             </div>
             {props.loggedOut &&
                 <div className="alert alert-success" role="alert">

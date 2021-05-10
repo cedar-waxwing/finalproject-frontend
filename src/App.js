@@ -111,6 +111,8 @@ function App() {
   //_____________________________________
 
   return (
+    <>
+    <Navbar userData={userData} token={token} logout={logout} loggedOut={loggedOut}/>
       <div className="container">
         <div className="row">
           {/* this is where any other code would go  */}
@@ -136,6 +138,7 @@ function App() {
           </Switch>
         </div>
       </div>
+      </>
   );
 }
 
@@ -143,7 +146,6 @@ export default function AppWithRouter() {
   return (
     <>
       <Router>
-      <Navbar />
         <App />
         {/* put footer here  */}
       </Router>
