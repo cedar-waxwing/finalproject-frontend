@@ -9,15 +9,15 @@ const Navbar = (props) => {
        
         <nav className="navbar navbar-light">
             <div className="container-fluid">
-            <banner className="logo display-1">&nbsp; EQUIP</banner>
+            <a className="logo display-1 text-light text-decoration-none" href="/main">&nbsp; EQUIP</a>
             {/* <div className="text-dark allfont"></div> */}
                 <form className="d-flex">
                     <div className="card-body ">
                         {!props.token ?
                             <>
-                                <Link to="/login" className="btn btn-clear">Log in</Link>
+                                <Link to="/login" className="btn btn-clear text-light">Log in</Link>
                                 &nbsp;
-                                <Link to="/signup" className="btn btn-clear">Sign up</Link>
+                                <Link to="/signup" className="btn btn-clear text-light">Sign up</Link>
                             </> : <>
                                 <h2 className="allfont text-end"> Welcome, {props.userData.name}</h2>
                                 <button onClick={props.logout} type="button" className="btn btn-clear text-light">Logout</button>

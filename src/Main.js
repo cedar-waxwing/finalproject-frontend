@@ -9,37 +9,39 @@ import Mypage from "./Mypage.js"
 
 function Main(props) {
 
-    const [searchData, setSearchData] = useState("")
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchData, setSearchData] = useState([]);
 
     const searchResult = (res) => {
-        console.log(res)
+        console.log(res);
+        setSearchData(res.data);
     }
 
     //don't need to send token if not in middleware
     function searchPosts(e) {
-        console.log(searchData)
+        console.log(searchQuery)
         e.preventDefault()
         axiosHelper({
             method: 'post',
             route: '/api/search',
-            data: { search: searchData },
+            data: { search: searchQuery },
             successMethod: searchResult
         })
     }
 
-    const handleSearch = e => setSearchData(e.target.value);
-    console.log(searchData)
+    const handleSearch = e => setSearchQuery(e.target.value);
+    console.log(searchQuery)
 
 
-    // const mappedSearch = searchData && searchData.map((post, index) => <div className="col-12" key={index}>
-    //     <div className="card">
-    //         <div className="card-body">
-    //             <Link to={`/post/${post.id}`} className="card-title">{post.title}</Link>
-    //             <p className="card-text">{post.description}</p>
-    //         </div>
-    //     </div>
-    // </div>
-    // )
+    const mappedSearch = searchData && searchData.map((post, index) => <div className="col-12" key={index}>
+        <div className="card border-0">
+            <div className="card-body allfont cardback">
+                <Link to={`/post/${post.id}`} className="card-title postdisplay text-dark text-decoration-none">{post.title}</Link>
+                <p className="card-text">{post.description}</p>
+            </div>
+        </div>
+    </div>
+    )
 
     return (
         <>
@@ -49,9 +51,9 @@ function Main(props) {
                 <i>List & find equipment in USEA Area VIII </i>
             </h2>
 
-            <video autoplay muted loop id="myVideo">
+            {/* <video playsinline autoplay muted loop id="myVideo">
                 <source src="dronefootage.mp4" type="video/mp4"></source>
-            </video>
+            </video> */}
             {/* carousel */}
             <div id="carouselExampleCaptions" className="col-9 carousel slide" data-bs-ride="carousel">
                 <div className="carousel-indicators">
@@ -94,19 +96,19 @@ function Main(props) {
             {/* end carsousel */}
             <body class="background">
                 <div className="col-12">
-                    <form className="mx-auto" onSubmit={searchPosts}>
-                        <input value={searchData} onChange={handleSearch} type="text" name="search"></input>
+                <div><br></br></div>
+                    <form className="mx-auto text-end" onSubmit={searchPosts}>
+                        <input value={searchQuery} onChange={handleSearch} type="text" name="search"></input>
                     &nbsp;
-                    <button className="btn btn-light" type="submit">Search</button>
+                    <button className="btn btn-dark text-light" type="submit">Search</button>
                     </form>
-                    {/* {searchData ?
+                    {searchData.length ?
                     <>
                         {mappedSearch}
                     </> : <>
                         <Posts postData={props.postData} />
                     </>
-                } */}
-                    <Posts postData={props.postData} />
+                }
                 </div>
                 {props.loggedOut &&
                     <div className="alert alert-warning" role="alert">

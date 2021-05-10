@@ -8,7 +8,7 @@ const Posts = ({ postData }) => {
         <div className="card border-0">
             <div className="card-body allfont cardback">
                 <Link to={`/post/${post.id}`} className="card-title postdisplay text-dark text-decoration-none" >{post.title}</Link>
-                {/* <h3 className="card-text">{post.description}</h3> */}
+                <p className="card-text">{post.description}</p>
             </div>
         </div>
     </div>
