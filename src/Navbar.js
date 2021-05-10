@@ -7,21 +7,21 @@ const Navbar = (props) => {
 
     return (
        
-        <nav className="navbar navbar-light bg-none">
+        <nav className="navbar navbar-light bg-0">
             <div className="container-fluid">
-            <img src="equiry.png"></img>
+            <img src="equip.png"></img>
                 <form className="d-flex">
-                    <div className="card-body">
+                    <div className="card-body ">
                         {!props.token ?
                             <>
-                                <Link to="/login" className="btn btn-success">Log in</Link>
+                                <Link to="/login" className="btn btn-clear text-light">Log in</Link>
                                 &nbsp;
-                                <Link to="/signup" className="btn btn-success">Sign up</Link>
+                                <Link to="/signup" className="btn btn-clear text-light">Sign up</Link>
                             </> : <>
-                                <h1 className="allfont text-start"> Welcome, {props.userData.name}</h1>
-                                <button onClick={props.logout} type="button" className="btn btn-success">Logout</button>
+                                <h1 className="allfont text-start text-light"> Welcome, {props.userData.name}</h1>
+                                <button onClick={props.logout} type="button" className="btn btn-clear text-light">Logout</button>
                                 &nbsp;
-                                <a href="/mypage" className="btn btn-success" role="button">Manage my Posts</a>
+                                <a href="/mypage" className="btn btn-clear text-light" role="button">Manage my Posts</a>
                             </>
                         }
                     </div>

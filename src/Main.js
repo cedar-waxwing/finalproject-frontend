@@ -43,11 +43,13 @@ function Main(props) {
 
     return (
         <>
+        <img src="kirsten-drew-fQ2n2lRV0dw-unsplash_2.jpg" className="hero img-fluid float-start"></img>
+        <body class="background">
             <div className="col-12">
             <form className="mx-auto" onSubmit={searchPosts}>
                     <input value={searchData} onChange={handleSearch} type="text" name="search"></input>
                     &nbsp;
-                    <button className="btn btn-success" type="submit">Search</button>
+                    <button className="btn btn-light" type="submit">Search</button>
                 </form>
                 {/* {searchData ?
                     <>
@@ -59,9 +61,10 @@ function Main(props) {
                 <Posts postData={props.postData} />
             </div>
             {props.loggedOut &&
-                <div className="alert alert-success" role="alert">
+                <div className="alert alert-warning" role="alert">
                     <h4 className="alert-heading">Logged out!</h4>
                 </div>}
+        </body>
         </>
     );
 }

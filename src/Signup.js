@@ -33,16 +33,17 @@ const Signup = (props) => {
             </a>
             </div>
             <div className="col-4">
-                <div>
-                    SIGN UP
-                </div>
+                <h2>
+                    Sign Up
+                </h2>
+                <br></br>
                 <form onSubmit={userRegistration}>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputName1" className="form-label">Name</label>
+                        <h3 htmlFor="exampleInputName1" className="form-label">Name</h3>
                         <input value={registrationData.name || ""} onChange={handleInputChange} name="name" type="name" className="form-control" id="exampleInputName1"></input>
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                        <h3 htmlFor="exampleInputEmail1" className="form-label">Email address</h3>
                         <input value={registrationData.email || ""} onChange={handleInputChange} name="email" type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input></div>
                     <div className="mb-3">
                         <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
@@ -52,7 +53,7 @@ const Signup = (props) => {
                 </form>
             </div>
             {props.success &&
-                <div className="alert alert-success" role="alert">
+                <div className="alert alert-warning" role="alert">
                     <h4 className="alert-heading">Signup successful!</h4>
                     <hr></hr>
                     <p className="mb-0">You will be redirected back to the homepage in {props.ms} seconds.</p>

@@ -1,12 +1,12 @@
 body {
   margin: 0;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Heebo', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Heebo', sans-serif;
 }
 
 .postdisplay {
@@ -14,11 +14,23 @@ code {
 }
 
 .allfont {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Heebo', sans-serif;
 }
 
 .btn {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Heebo', sans-serif;
+}
 
+.background {
+  background-color: black;
+  /* background-image: url("kirsten-drew-fQ2n2lRV0dw-unsplash.jpg"); */
+}
 
+/* .hero {
+ width: 100vw;
+ height: 100vh;
+} */
+
+.cardback {
+  background-color: black;
 }
