@@ -40,20 +40,20 @@ const Login = (props) => {
             </a>
             </div>
             <div className="col-4">
-                <h2 className="text-light">
+                <h2 className="text-dark">
                     Log In
                 </h2>
                 <br></br>
                 <form onSubmit={userLogin} >
                     <div className="mb-3">
-                        <h3 htmlFor="exampleInputEmail1" className="form-label text-light">Email address</h3>
+                        <h3 htmlFor="exampleInputEmail1" className="form-label text-dark">Email address</h3>
                         <input value={loginData.username || ""} onChange={handleInputChange} name="username" type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
                     </div>
                     <div className="mb-3">
-                        <h3 htmlFor="exampleInputPassword1" className="form-label text-light">Password</h3>
+                        <h3 htmlFor="exampleInputPassword1" className="form-label text-dark">Password</h3>
                         <input value={loginData.password || ""} onChange={handleInputChange} name="password" type="password" className="form-control" id="exampleInputPassword1"></input>
                     </div>
-                    <button type="submit" className="btn btn-clear text-light">Submit</button>
+                    <button type="submit" className="btn btn-clear text-dark">Submit</button>
                 </form>
             </div>
             {props.success &&

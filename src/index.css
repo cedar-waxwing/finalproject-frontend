@@ -22,7 +22,7 @@ code {
 }
 
 .background {
-  background-color: black;
+  background-color: white;
   /* background-image: url("kirsten-drew-fQ2n2lRV0dw-unsplash.jpg"); */
 }
 
@@ -32,5 +32,15 @@ code {
 } */
 
 .cardback {
-  background-color: black;
+  background-color: white;
+}
+
+.navbar {
+  background-color: #032D0B; 
+  opacity: 100%;
+  color: white;
+}
+
+.logo {
+  font-family: 'Philosopher', sans-serif;
 }
