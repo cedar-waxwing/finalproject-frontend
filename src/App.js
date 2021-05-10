@@ -6,6 +6,7 @@ import Create from "./Create.js"
 import Details from "./Details.js"
 import Mypage from "./Mypage.js"
 import Navbar from "./Navbar.js"
+import Footer from "./Footer.js"
 import { BrowserRouter as Router, Link, Switch, Route, useHistory, useLocation } from 'react-router-dom'
 import axios from 'axios';
 import { axiosHelper } from "./axiosHelper";
@@ -138,6 +139,7 @@ function App() {
           </Switch>
         </div>
       </div>
+      <Footer />
       </>
   );
 }

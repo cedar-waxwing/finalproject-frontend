@@ -11,10 +11,12 @@ function Main(props) {
 
     const [searchQuery, setSearchQuery] = useState("");
     const [searchData, setSearchData] = useState([]);
+    const [submit, setSubmit] = useState(false);
 
     const searchResult = (res) => {
         console.log(res);
         setSearchData(res.data);
+        setSubmit(true)
     }
 
     //don't need to send token if not in middleware
@@ -29,19 +31,32 @@ function Main(props) {
         })
     }
 
-    const handleSearch = e => setSearchQuery(e.target.value);
-    console.log(searchQuery)
+    //is it alphanumeric or not? only if it is, run this .
+    //checks numeric, upper alpha, lower alpha.
+    function isAlphaNumeric(str) {
+        var code, i, len;
+        for (i = 0, len = str.length; i < len; i++) {
+          code = str.charCodeAt(i);
+          if (!(code > 47 && code < 58) && // numeric (0-9)
+              !(code > 64 && code < 91) && // upper alpha (A-Z)
+              !(code > 96 && code < 123) && // lower alpha (a-z)
+              !(code == 32)) {
+            return false;
+          }
+        }
+        return true;
+      };
 
 
-    const mappedSearch = searchData && searchData.map((post, index) => <div className="col-12" key={index}>
-        <div className="card border-0">
-            <div className="card-body allfont cardback">
-                <Link to={`/post/${post.id}`} className="card-title postdisplay text-dark text-decoration-none">{post.title}</Link>
-                <p className="card-text">{post.description}</p>
-            </div>
-        </div>
-    </div>
-    )
+    const handleSearch = e => {
+        if (isAlphaNumeric(e.target.value)) {
+        setSearchQuery(e.target.value);
+        } else {
+            alert("Search input must be alphanumeric.")
+        }
+        setSubmit(false);
+    }
+
 
     return (
         <>
@@ -96,20 +111,26 @@ function Main(props) {
             {/* end carsousel */}
             <body class="background">
                 <div className="col-12">
-                <div><br></br></div>
+                    <div><br></br></div>
                     <form className="mx-auto text-end" onSubmit={searchPosts}>
                         <input value={searchQuery} onChange={handleSearch} type="text" name="search"></input>
                     &nbsp;
                     <button className="btn btn-dark text-light" type="submit">Search</button>
                     </form>
-                    {searchData.length ?
-                    <>
-                        {mappedSearch}
-                    </> : <>
-                        <Posts postData={props.postData} />
-                    </>
-                }
+
+                    {/* if search term does not exist in database, return alert message */}
+                    {searchData.length == 0 && submit &&
+                        <>
+                            <br></br>
+                            <div className="alert alert-success" role="alert">
+                                "{searchQuery}" could not be found.
+                            </div>
+                        </>
+                    }
+                    {/* this returns either the full list of posts or the search results.  */}
+                    <Posts postData={searchData.length > 0 ? searchData : props.postData} />
                 </div>
+                {/* this is not working currently */}
                 {props.loggedOut &&
                     <div className="alert alert-warning" role="alert">
                         <h4 className="alert-heading">Logged out!</h4>
