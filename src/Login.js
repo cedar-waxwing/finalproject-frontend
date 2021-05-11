@@ -1,61 +1,88 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { axiosHelper } from "./axiosHelper";
 
 const Login = (props) => {
     const [loginData, setLoginData] = useState({})
+    const [loginSubmit, setLoginSubmit] = useState(false)
+
+    function successHandler(res) {
+        console.log(res)
+        props.saveToken(res.data.access_token);
+        props.handleSuccess()
+        // setLoginSubmit(true)
+    }
+
+    function failureHandler(res) {
+        console.log(res)
+        setLoginSubmit(true) 
+    }
 
     function userLogin(e) {
         console.log(loginData)
         e.preventDefault()
-        axios({
+        axiosHelper({
             method: 'post',
-            url: 'http://clonesProject-rachelehlers1288217.codeanyapp.com/oauth/token',
+            route: '/oauth/token',
             data: {
                 grant_type: "password",
                 client_id: "2",
-                client_secret: "1BhzemjkSMW2fs7UOau1AockeisPRTKlpp2FNm2u",
+                client_secret: "G5FOmn80z3VaVQDHhyhY4WNPMWwjTqWXE2wIiueo",
                 scope: "",
                 ...loginData
-            }
+            },
+            successMethod: successHandler,
+            failureMethod: failureHandler
         })
-            .then(function (response) {
-                console.log(response)
-                props.saveToken(response.data.access_token);
-                props.handleSuccess()
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
     }
 
-    const handleInputChange = e => setLoginData(previousState => ({ ...previousState, [e.target.name]: e.target.value }));
-
+    const handleInputChange = e => { 
+        setLoginData(previousState => {
+            setLoginSubmit(false)
+            return ({ ...previousState, [e.target.name]: e.target.value })
+        });
+    }
 
     return (
-        <div className="row">
+        <>
             <div className="col-4">
-                <div>
-                    LOG IN
-                </div>
+            <br></br>
+                <h2 className="text-dark">
+                    Log In
+                </h2>
+                <br></br>
                 <form onSubmit={userLogin} >
                     <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                        <h3 htmlFor="exampleInputEmail1" className="form-label text-dark">Email address</h3>
                         <input value={loginData.username || ""} onChange={handleInputChange} name="username" type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                        <h3 htmlFor="exampleInputPassword1" className="form-label text-dark">Password</h3>
                         <input value={loginData.password || ""} onChange={handleInputChange} name="password" type="password" className="form-control" id="exampleInputPassword1"></input>
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn btn-dark text-light">Submit</button>
+                    &nbsp;
+                    &nbsp;
+                    <a href="/main" type="button" className="back btn btn-dark allfont">Back</a>
                 </form>
+                <br></br>
             </div>
             {props.success &&
-                <div className="alert alert-success" role="alert">
+                <div className="alert alert-warning" role="alert">
                     <h4 className="alert-heading">Login successful!</h4>
                     <hr></hr>
                     <p className="mb-0">You will be redirected back to the homepage in {props.ms} seconds.</p>
-                </div>}
-        </div>
+                </div>
+                /* if invalid username/password, error message */
+            }
+            
+            {props.success == false && 
+            loginSubmit && 
+            <div className="alert alert-warning" role="alert">
+                    <h4 className="alert-heading">You have entered an invalid username or password.</h4>
+                </div>
+                }
+        </>
     );
 }
 

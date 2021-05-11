@@ -2,8 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Main from "./Main.js"
 import Signup from "./Signup.js"
 import Login from "./Login.js"
+import Create from "./Create.js"
+import Details from "./Details.js"
+import Mypage from "./Mypage.js"
+import Navbar from "./Navbar.js"
+import Footer from "./Footer.js"
 import { BrowserRouter as Router, Link, Switch, Route, useHistory, useLocation } from 'react-router-dom'
 import axios from 'axios';
+import { axiosHelper } from "./axiosHelper";
 
 function App() {
   let history = useHistory();
@@ -20,26 +26,25 @@ function App() {
     window.localStorage.setItem("token", token)
     getUser(token)
     setLoggedOut(false)
+    setMs(3)
     //use react router hook, useHistory -- will take you to a specific page anywhere in the site. Helpful if you have logged in and want to take ther person somewhere else. 
   }
 
-  function logout() {
-    axios({
-      method: 'get',
-      url: 'http://clonesProject-rachelehlers1288217.codeanyapp.com/api/auth/logout',
-      headers: { "Authorization": "Bearer " + token }
-    })
-      .then(function (response) {
-        setToken("")
-        window.localStorage.removeItem("token")
-        setUser({})
-        setLoggedOut(true)
-        setInterval(()=>setLoggedOut(false), 3000)
+  function handleLogout(response) {
+    setToken("")
+    window.localStorage.removeItem("token")
+    setUser({})
+    setLoggedOut(true)
+    setInterval(() => setLoggedOut(false), 3000)
 
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  }
+
+  function logout() {
+    axiosHelper({
+      route: '/api/logout',
+      token,
+      successMethod: handleLogout
+    })
   }
 
   //post of didMount. 
@@ -51,57 +56,91 @@ function App() {
   }, [])
 
 
+  //save userdata
   const [userData, setUser] = useState({})
 
-  function getUser(token) {
-    axios({
-      method: 'get',
-      url: 'http://clonesProject-rachelehlers1288217.codeanyapp.com/api/auth/user',
-      data: { token },
-      headers: { "Authorization": "Bearer " + token }
-    })
-      .then(function (response) {
-        setUser(response.data);
-
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  function saveUser(res) {
+    setUser(res.data)
   }
+
+  function getUser(token) {
+    axiosHelper({
+      method: 'get',
+      route: '/api/user',
+      token,
+      successMethod: saveUser
+    })
+  }
+
   //This function returns a successful login/signup notice if the user is successful in logging in/signing up. 
   const handleSuccess = () => {
     let countdown = null;
     setSuccess(true)
-    countdown = setInterval(() => {      
+    countdown = setInterval(() => {
       setMs(prevMs => {
         if (prevMs <= 1) {
           setSuccess(false)
           history.push("/main")
-          clearInterval(countdown);
-          console.log("interval")
+          clearInterval(countdown)
         }
-        return prevMs-1
+        return prevMs - 1
       })
     }, 1000)
   }
 
+  //_____________________________________
+  //getting all posts from API 
 
+  const [postData, setPost] = useState([])
+
+  function savePost(res) {
+    setPost(res.data);
+  }
+
+  function getPosts() {
+    axiosHelper({
+      method: 'get',
+      route: '/api/posts/all',
+      successMethod: savePost
+    })
+  }
+  //this runs the function onmount.
+  useEffect(() => {
+    getPosts()
+  }, [])
+
+  //_____________________________________
 
   return (
-    <>
-      {/* this is where any other code would go  */}
-      <Switch>
-        <Route exact path={["/main", "/"]}>
-          <Main userData={userData} token={token} logout={logout} loggedOut={loggedOut} />
-        </Route>
-        <Route path="/signup">
-          <Signup saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms}/>
-        </Route>
-        <Route path="/login">
-          <Login saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms}/>
-        </Route>
-      </Switch>
-    </>
+    <body className="d-flex flex-column h-100">
+    <Navbar userData={userData} token={token} logout={logout} loggedOut={loggedOut}/>
+      <div className="container">
+        <div className="row">
+          {/* this is where any other code would go  */}
+          <Switch>
+            <Route exact path={["/main", "/"]}>
+              <Main userData={userData} token={token} logout={logout} loggedOut={loggedOut} postData={postData} />
+            </Route>
+            <Route path="/signup">
+              <Signup saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms} />
+            </Route>
+            <Route path="/login">
+              <Login saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms} />
+            </Route>
+            <Route exact path={["/create"]}>
+              <Create token={token} />
+            </Route>
+            <Route path={["/post/:id"]}>
+              <Details postData={postData} />
+            </Route>
+            <Route path={["/mypage"]}>
+              <Mypage userData={userData} token={token}/>
+            </Route>
+          </Switch>
+        </div>
+      </div>
+      <Footer />
+      </body>
   );
 }
 
@@ -110,6 +149,7 @@ export default function AppWithRouter() {
     <>
       <Router>
         <App />
+        {/* put footer here  */}
       </Router>
     </>
   )
