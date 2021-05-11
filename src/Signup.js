@@ -49,6 +49,7 @@ const Signup = (props) => {
                     <a href="/main" type="button" className="back btn btn-dark allfont">Back</a>
                 </form>
             </div>
+            <br></br>
             {props.success &&
                 <div className="alert alert-warning" role="alert">
                     <h4 className="alert-heading">Signup successful!</h4>

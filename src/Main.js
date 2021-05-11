@@ -78,25 +78,25 @@ function Main(props) {
                 </div>
                 <div className="carousel-inner">
                     <div className="carousel-item active">
-                        <img src="skytest.png" className="d-block w-100" alt="..."></img>
-                        <div className="carousel-caption d-none d-md-block">
+                        <img src="saddle.jpg" className="d-block w-100" alt="..."></img>
+                        {/* <div className="carousel-caption d-none d-md-block">
                             <h5>First slide label</h5>
                             <p>Some representative placeholder content for the first slide.</p>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="carousel-item">
-                        <img src="test.png" className="d-block w-100" alt="..."></img>
-                        <div className="carousel-caption d-none d-md-block">
+                        <img src="stirrups.jpg" className="d-block w-100" alt="..."></img>
+                        {/* <div className="carousel-caption d-none d-md-block">
                             <h5>Second slide label</h5>
                             <p>Some representative placeholder content for the second slide.</p>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="carousel-item">
-                        <img src="test.png" className="d-block w-100" alt="..."></img>
-                        <div className="carousel-caption d-none d-md-block">
+                        <img src="threesaddles.jpg" className="d-block w-100" alt="..."></img>
+                        {/* <div className="carousel-caption d-none d-md-block">
                             <h5>Third slide label</h5>
                             <p>Some representative placeholder content for the third slide.</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">

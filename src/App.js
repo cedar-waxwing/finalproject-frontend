@@ -112,7 +112,7 @@ function App() {
   //_____________________________________
 
   return (
-    <>
+    <body className="d-flex flex-column h-100">
     <Navbar userData={userData} token={token} logout={logout} loggedOut={loggedOut}/>
       <div className="container">
         <div className="row">
@@ -140,7 +140,7 @@ function App() {
         </div>
       </div>
       <Footer />
-      </>
+      </body>
   );
 }
 

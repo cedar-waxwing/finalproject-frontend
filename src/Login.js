@@ -19,7 +19,7 @@ const Login = (props) => {
             data: {
                 grant_type: "password",
                 client_id: "2",
-                client_secret: "0d6izzZa9m5pSZD6joTzywGQFeaNo7FbINMPm8QM",
+                client_secret: "wiMZf1jybmzynm6At89VSMILJI4uWYJWmR5oEJpI",
                 scope: "",
                 ...loginData
             },
@@ -52,13 +52,22 @@ const Login = (props) => {
                     &nbsp;
                     <a href="/main" type="button" className="back btn btn-dark allfont">Back</a>
                 </form>
+                <br></br>
             </div>
             {props.success &&
                 <div className="alert alert-warning" role="alert">
                     <h4 className="alert-heading">Login successful!</h4>
                     <hr></hr>
                     <p className="mb-0">You will be redirected back to the homepage in {props.ms} seconds.</p>
-                </div>}
+                </div>
+                /* if invalid username/password, error message */
+            }
+            
+            {props.success == false && 
+            <div className="alert alert-warning" role="alert">
+                    <h4 className="alert-heading">You have entered an invalid username or password.</h4>
+                </div>
+                }
         </>
     );
 }

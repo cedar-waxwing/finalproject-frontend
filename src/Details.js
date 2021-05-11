@@ -9,11 +9,14 @@ const Details = (props) => {
     const post = props.postData.find(item => item.id === parseInt(id))
 
     return (
-            <>    
+        <>
             <div className="col-11">
                 <div className="card border-0">
                     <div className="card-body allfont">
                         <h1 className="card-title">{post.title}</h1>
+                        &nbsp;
+                        <img src={post.image}></img>
+                        <br></br>
                         &nbsp;
                         <h2 className="card-text">{post.description}</h2>
                         &nbsp;
@@ -22,9 +25,9 @@ const Details = (props) => {
                         <h3 className="card-text">{post.contact}</h3>
                     </div>
                 </div>
-            <a href="/main" type="button" className="back btn btn-dark allfont">Back</a>
+                <a href="/main" type="button" className="back btn btn-dark allfont">Back</a>
             </div>
-            </>
+        </>
     );
 }
 
