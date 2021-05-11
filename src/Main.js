@@ -47,7 +47,7 @@ function Main(props) {
         return true;
       };
 
-
+//refactored bc string
     const handleSearch = e => {
         if (isAlphaNumeric(e.target.value)) {
         setSearchQuery(e.target.value);

@@ -4,10 +4,18 @@ import { axiosHelper } from "./axiosHelper";
 
 const Login = (props) => {
     const [loginData, setLoginData] = useState({})
+    const [loginSubmit, setLoginSubmit] = useState(false)
 
     function successHandler(res) {
+        console.log(res)
         props.saveToken(res.data.access_token);
         props.handleSuccess()
+        // setLoginSubmit(true)
+    }
+
+    function failureHandler(res) {
+        console.log(res)
+        setLoginSubmit(true) 
     }
 
     function userLogin(e) {
@@ -19,16 +27,21 @@ const Login = (props) => {
             data: {
                 grant_type: "password",
                 client_id: "2",
-                client_secret: "wiMZf1jybmzynm6At89VSMILJI4uWYJWmR5oEJpI",
+                client_secret: "G5FOmn80z3VaVQDHhyhY4WNPMWwjTqWXE2wIiueo",
                 scope: "",
                 ...loginData
             },
-            successMethod: successHandler
+            successMethod: successHandler,
+            failureMethod: failureHandler
         })
     }
 
-    const handleInputChange = e => setLoginData(previousState => ({ ...previousState, [e.target.name]: e.target.value }));
-
+    const handleInputChange = e => { 
+        setLoginData(previousState => {
+            setLoginSubmit(false)
+            return ({ ...previousState, [e.target.name]: e.target.value })
+        });
+    }
 
     return (
         <>
@@ -64,6 +77,7 @@ const Login = (props) => {
             }
             
             {props.success == false && 
+            loginSubmit && 
             <div className="alert alert-warning" role="alert">
                     <h4 className="alert-heading">You have entered an invalid username or password.</h4>
                 </div>
