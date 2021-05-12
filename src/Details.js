@@ -15,7 +15,7 @@ const Details = (props) => {
                     <div className="card-body allfont">
                         <h1 className="card-title">{post.title}</h1>
                         &nbsp;
-                        <img src={post.image}></img>
+                        <img className="imageproperties" src={post.image}></img>
                         <br></br>
                         &nbsp;
                         <h2 className="card-text">{post.description}</h2>
@@ -26,6 +26,8 @@ const Details = (props) => {
                     </div>
                 </div>
                 <a href="/main" type="button" className="back btn btn-dark allfont">Back</a>
+                <br></br>
+                &nbsp;
             </div>
         </>
     );

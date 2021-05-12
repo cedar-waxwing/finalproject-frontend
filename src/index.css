@@ -37,7 +37,6 @@ code {
 
 .navbar {
   background-color: #032D0B; 
-  opacity: 100%;
   color: white;
 }
 
@@ -45,6 +44,10 @@ code {
   font-family: 'Philosopher', sans-serif;
 }
 
-.btncolor {
+.btn {
   background-color: #032D0B;
+}
+
+.imageproperties {
+  max-width: 100%
 }
