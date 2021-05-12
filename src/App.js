@@ -16,6 +16,7 @@ function App() {
   const [success, setSuccess] = useState(false)
   const [loggedOut, setLoggedOut] = useState(false)
   const [ms, setMs] = useState(3)
+  const [created, setCreated] = useState(false)
 
   const [token, setToken] = useState("");
   //need another state here for the userdata -- once navigate back to the page, it should still say "Hello Rachel!" etc.
@@ -31,12 +32,21 @@ function App() {
   }
 
   function handleLogout(response) {
-    setToken("")
-    window.localStorage.removeItem("token")
-    setUser({})
+    let countdown = null;
     setLoggedOut(true)
-    setInterval(() => setLoggedOut(false), 3000)
-
+    countdown = setInterval(() => {
+      setMs(prevMs => {
+        if (prevMs <= 1) {
+          setToken("")
+          window.localStorage.removeItem("token")
+          setUser({})
+          setLoggedOut(false)
+          history.push('/main')
+          clearInterval(countdown)
+        }
+        return prevMs - 1
+      })
+    }, 500)
   }
 
   function logout() {
@@ -88,6 +98,22 @@ function App() {
     }, 1000)
   }
 
+  // This function returns a successful post creation notice & redirect if the user is successful in creating a post
+  const successfulCreate = () => {
+    let countdown = null;
+    setCreated(true)
+    countdown = setInterval(() => {
+      setMs(prevMs => {
+        if (prevMs <= 1) {
+          setCreated(false)
+          history.push("/mypage")
+          clearInterval(countdown)
+        }
+        return prevMs - 1
+      })
+    }, 1000)
+  }
+
   //_____________________________________
   //getting all posts from API 
 
@@ -113,7 +139,7 @@ function App() {
 
   return (
     <body className="d-flex flex-column h-100">
-    <Navbar userData={userData} token={token} logout={logout} loggedOut={loggedOut}/>
+      <Navbar userData={userData} token={token} logout={logout} loggedOut={loggedOut} />
       <div className="container">
         <div className="row">
           {/* this is where any other code would go  */}
@@ -128,19 +154,19 @@ function App() {
               <Login saveToken={saveToken} success={success} handleSuccess={handleSuccess} ms={ms} />
             </Route>
             <Route exact path={["/create"]}>
-              <Create token={token} />
+              <Create token={token} successfulCreate={successfulCreate} created={created} ms={ms} />
             </Route>
             <Route path={["/post/:id"]}>
               <Details postData={postData} />
             </Route>
             <Route path={["/mypage"]}>
-              <Mypage userData={userData} token={token}/>
+              <Mypage userData={userData} token={token} getPosts={getPosts}/>
             </Route>
           </Switch>
         </div>
       </div>
       <Footer />
-      </body>
+    </body>
   );
 }
 

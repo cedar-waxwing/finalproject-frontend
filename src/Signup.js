@@ -25,8 +25,8 @@ const Signup = (props) => {
 
     return (
         <>
-            <div className="col-4">
-            <br></br>
+            <div className="col-12">
+                <br></br>
                 <h2>
                     Sign Up
                 </h2>
@@ -41,6 +41,11 @@ const Signup = (props) => {
                         <input value={registrationData.email || ""} onChange={handleInputChange} name="email" type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input></div>
                     <div className="mb-3">
                         <h3 htmlFor="exampleInputPassword1" className="form-label">Password</h3>
+                        <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">
+                                Must be at least 8 characters long.
+                            </span>
+                        </div>
                         <input value={registrationData.password || ""} onChange={handleInputChange} name="password" type="password" className="form-control" id="exampleInputPassword1"></input>
                     </div>
                     <button type="submit" className="btn btn-dark">Submit</button>
@@ -48,6 +53,7 @@ const Signup = (props) => {
                     &nbsp;
                     <a href="/main" type="button" className="back btn btn-dark allfont">Back</a>
                 </form>
+                <br></br>
             </div>
             <br></br>
             {props.success &&
@@ -56,6 +62,8 @@ const Signup = (props) => {
                     <hr></hr>
                     <p className="mb-0">You will be redirected back to the homepage in {props.ms} seconds.</p>
                 </div>}
+
+                &nbsp;
         </>
     );
 }
