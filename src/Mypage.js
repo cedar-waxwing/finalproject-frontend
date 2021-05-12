@@ -33,22 +33,34 @@ function Mypage(props) {
 
     return (
         <>
-            <div className="col-4">
-            &nbsp;
+            <div className="col-12">
+        <br></br>
             <h1 className="allfont">Posts I've Created</h1>
-                <Posts postData={myPostData} />
+            <a href="/create" className="btn btn-dark" role="button">Create Post</a>
+            <br></br>
+            &nbsp;
+                <Posts userData={props.userData} postData={myPostData} />
             </div>
-            <div className="col-4">
-                <div className="card border-white" >
-                    <div className="card-body">
-                        <a href="/create" className="btn btn-dark" role="button">Create Post</a>
-                        &nbsp;
-                        &nbsp;
-                        <button type="button" className="btn btn-dark"> Saved Posts </button>
-                        <br></br>
-                    </div>
-                </div>
-            </div>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            &nbsp;
         </>
     );
 }

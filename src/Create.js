@@ -13,6 +13,7 @@ const Create = (props) => {
             route: '/api/post/create',
             data: postData,
             token: props.token,
+            successMethod: props.successfulCreate
         })
     }
 
@@ -48,7 +49,24 @@ const Create = (props) => {
                     
                 </form>
                 <br></br>
+                {props.created &&
+                <div className="alert alert-warning" role="alert">
+                    <h4 className="alert-heading">Post created!</h4>
+                    <hr></hr>
+                    <p className="mb-0">You will be redirected back to your homepage in {props.ms} seconds.</p>
+                </div>
+            }
+
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            &nbsp;
+
             </div>
+            
     );
 }
 

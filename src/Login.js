@@ -27,7 +27,7 @@ const Login = (props) => {
             data: {
                 grant_type: "password",
                 client_id: "2",
-                client_secret: "G5FOmn80z3VaVQDHhyhY4WNPMWwjTqWXE2wIiueo",
+                client_secret: "M6zdutSRXIpzWLb9WOC0f5HZp1ucVAP9YoElO6Tw",
                 scope: "",
                 ...loginData
             },
@@ -45,7 +45,7 @@ const Login = (props) => {
 
     return (
         <>
-            <div className="col-4">
+            <div className="col-12">
             <br></br>
                 <h2 className="text-dark">
                     Log In
@@ -73,8 +73,8 @@ const Login = (props) => {
                     <hr></hr>
                     <p className="mb-0">You will be redirected back to the homepage in {props.ms} seconds.</p>
                 </div>
-                /* if invalid username/password, error message */
             }
+            
             
             {props.success == false && 
             loginSubmit && 
@@ -82,6 +82,13 @@ const Login = (props) => {
                     <h4 className="alert-heading">You have entered an invalid username or password.</h4>
                 </div>
                 }
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                &nbsp;
+
         </>
     );
 }

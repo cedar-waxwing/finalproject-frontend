@@ -36,21 +36,21 @@ function Main(props) {
     function isAlphaNumeric(str) {
         var code, i, len;
         for (i = 0, len = str.length; i < len; i++) {
-          code = str.charCodeAt(i);
-          if (!(code > 47 && code < 58) && // numeric (0-9)
-              !(code > 64 && code < 91) && // upper alpha (A-Z)
-              !(code > 96 && code < 123) && // lower alpha (a-z)
-              !(code == 32)) {
-            return false;
-          }
+            code = str.charCodeAt(i);
+            if (!(code > 47 && code < 58) && // numeric (0-9)
+                !(code > 64 && code < 91) && // upper alpha (A-Z)
+                !(code > 96 && code < 123) && // lower alpha (a-z)
+                !(code == 32)) {
+                return false;
+            }
         }
         return true;
-      };
+    };
 
-//refactored bc string
+    //refactored bc string
     const handleSearch = e => {
         if (isAlphaNumeric(e.target.value)) {
-        setSearchQuery(e.target.value);
+            setSearchQuery(e.target.value);
         } else {
             alert("Search input must be alphanumeric.")
         }
@@ -62,15 +62,12 @@ function Main(props) {
         <>
             {/* break for distance from nav bar */}
             <div><br></br></div>
-            <h2 className="col-3 text-dark allfont align-self-center">
-                <i>List & find equipment in USEA Area VIII </i>
+            <h2 className="col-3 text-dark allfont align-self-center d-none d-md-block">
+                <i className=" d-sm-none d-md-block">List & find equipment in USEA Area VIII </i>
             </h2>
 
-            {/* <video playsinline autoplay muted loop id="myVideo">
-                <source src="dronefootage.mp4" type="video/mp4"></source>
-            </video> */}
             {/* carousel */}
-            <div id="carouselExampleCaptions" className="col-9 carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleCaptions" className="col-9 carousel slide align-self-center d-none d-md-block" data-bs-ride="carousel">
                 <div className="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -117,7 +114,7 @@ function Main(props) {
                     &nbsp;
                     <button className="btn btn-dark text-light" type="submit">Search</button>
                     </form>
-
+                    <br></br>
                     {/* if search term does not exist in database, return alert message */}
                     {searchData.length == 0 && submit &&
                         <>
@@ -128,13 +125,8 @@ function Main(props) {
                         </>
                     }
                     {/* this returns either the full list of posts or the search results.  */}
-                    <Posts postData={searchData.length > 0 ? searchData : props.postData} />
+                    <Posts token={props.token} userData={props.userData} postData={searchData.length > 0 ? searchData : props.postData} />
                 </div>
-                {/* this is not working currently */}
-                {props.loggedOut &&
-                    <div className="alert alert-warning" role="alert">
-                        <h4 className="alert-heading">Logged out!</h4>
-                    </div>}
             </body>
         </>
     );
